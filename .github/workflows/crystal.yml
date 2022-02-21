@@ -32,3 +32,5 @@ jobs:
       run: shards install
     - name: Run tests
       run: crystal spec
+    - name: Build
+      run: shards build
