@@ -12,6 +12,7 @@ jobs:
       fail-fast: false
       matrix:
         crystal: [latest, nightly]
+        clang_version: [11, 12, 13, 14]
 
     runs-on: ubuntu-latest
 
@@ -23,7 +24,10 @@ jobs:
       with:
           crystal: ${{ matrix.crystal }}
     - name: Install packages
-      run: sudo apt-get install -y libclang-dev
+      run: |
+        wget https://apt.llvm.org/llvm.sh
+        chmod +x llvm.sh
+        sudo ./llvm.sh ${{ matrix.clang_version }}
     - name: Install dependencies
       run: shards install
     - name: Run tests
