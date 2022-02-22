@@ -3,8 +3,6 @@ name: Crystal CI
 
 on:
   push:
-  schedule:
-      - cron: '0 0 * * *'
 
 jobs:
   build:
@@ -31,6 +29,7 @@ jobs:
         chmod +x llvm.sh
         sudo ./llvm.sh ${{ matrix.clang_version }}
         export LLVM_CONFIG=$(command -v llvm-config-${{ matrix.clang_version }})
+        echo $LLVM_CONFIG
     - name: Install dependencies
       run: shards install
     - name: Run tests
