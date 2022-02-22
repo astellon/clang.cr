@@ -25,9 +25,11 @@ jobs:
           crystal: ${{ matrix.crystal }}
     - name: Install packages
       run: |
+        apt-get install -y lsb-release wget software-properties-common gnupg
         wget https://apt.llvm.org/llvm.sh
         chmod +x llvm.sh
         sudo ./llvm.sh ${{ matrix.clang_version }}
+        export LLVM_CONFIG=$(whatis -w "llvm-config*" | cut -d' ' -f 1 | sort -V | head -n 1 | xargs which)
     - name: Install dependencies
       run: shards install
     - name: Run tests
