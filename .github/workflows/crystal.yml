@@ -25,7 +25,7 @@ jobs:
           crystal: ${{ matrix.crystal }}
     - name: Install packages
       run: |
-        apt-get install -y lsb-release wget software-properties-common gnupg
+        sudo apt-get install -y lsb-release wget software-properties-common gnupg
         wget https://apt.llvm.org/llvm.sh
         chmod +x llvm.sh
         sudo ./llvm.sh ${{ matrix.clang_version }}
